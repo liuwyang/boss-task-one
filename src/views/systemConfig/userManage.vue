@@ -83,8 +83,7 @@
 </template>
 
 <script>
-// import { listUser, getUser, delUser, addUser, updateUser, exportUser, resetUserPwd, changeUserStatus, importTemplate } from '@/api/systemConfig/user'
-import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import Pagination from '@/components/Pagination'
 
 export default {
   name: 'UserManage',
@@ -97,7 +96,13 @@ export default {
       dialogVisible: false,
       dialogType: '新增',
       userForm: {},
-      roles: [],
+      roles: [
+        {
+          roleId: '',
+          roleName: '',
+          status: ''
+        }
+      ],
       rules: {
         userName: [
           { required: true, message: '用户名称不能为空', trigger: 'blur' }
@@ -129,36 +134,6 @@ export default {
           userName: '张伟',
           roleName: '普通用户',
           phone: 13107936386
-        },
-        {
-          userId: 1,
-          userName: 'lwy',
-          roleName: '超级管理员',
-          phone: 13107936386
-        },
-        {
-          userId: 1,
-          userName: 'lwy',
-          roleName: '超级管理员',
-          phone: 13107936386
-        },
-        {
-          userId: 1,
-          userName: 'lwy',
-          roleName: '超级管理员',
-          phone: 13107936386
-        },
-        {
-          userId: 1,
-          userName: 'lwy',
-          roleName: '超级管理员',
-          phone: 13107936386
-        },
-        {
-          userId: 1,
-          userName: 'lwy',
-          roleName: '超级管理员',
-          phone: 13107936386
         }
       ],
       queryForm: {
@@ -171,6 +146,7 @@ export default {
   },
   methods: {
     submitForm() {
+
     },
     handleQuery() {
 
@@ -182,25 +158,29 @@ export default {
     },
     handleUpdate(row) {
       // this.resetForm()
-      this.userForm.userName = 'lwy'
-      this.userForm.phone = '13107936386'
+      this.userForm.userName = row.userName
+      this.userForm.phone = row.phone
       this.userForm.password = 'abc123'
-      this.userForm.roleIds = '超级管理员'
+      this.roles.roleId = row.roleName
+      this.roles.roleName = row.roleName
+      // console.log(row.roleName)
       this.dialogVisible = true
       this.dialogType = '编辑'
     },
     handleDelete(row) {
-      const userId = row.userId
-      this.$confirm('是否确认删除用户编号为"' + userId + '"的数据?', '警告', {
+      this.$confirm('确认要删除该用户吗?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        // return delUser(userId)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('删除成功')
-      }).catch(function() {})
+      })
+        .then(async() => {
+          // 删除操作
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        })
+        .catch(err => { console.error(err) })
     },
     cancel() {
       this.dialogVisible = false

@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">登录</h3>
+        <h3 class="title">权限管理系统登录</h3>
       </div>
 
       <el-form-item prop="username">
@@ -125,11 +125,17 @@ export default {
       }
     }
     return {
+      // loginForm: {
+      //   username: 'admin',
+      //   password: 'abc123',
+      //   phone: '13107936386',
+      //   message: '666666'
+      // },
       loginForm: {
-        username: 'admin',
-        password: 'abc123',
-        phone: '13107936386',
-        message: '666666'
+        username: '',
+        password: '',
+        phone: '',
+        message: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],

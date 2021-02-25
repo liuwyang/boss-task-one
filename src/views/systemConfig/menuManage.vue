@@ -117,9 +117,9 @@ export default {
       this.dialogType = '新增'
     },
     handleUpdate(row) {
-      this.menuForm.menuName = '系统配置'
+      this.menuForm.menuName = row.menuName
       this.menuForm.path = '/systemConfig'
-      this.menuForm.component = 'http://localhost:9527/#/systemConfig/'
+      this.menuForm.component = row.component
       this.menuForm.permission = 1
       this.dialogFormVisible = true
       this.dialogType = '编辑'

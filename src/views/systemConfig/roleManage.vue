@@ -109,10 +109,10 @@ export default {
         ],
         description: [
           { required: true, message: '角色描述不能为空', trigger: 'blur' }
-        ],
-        menus: [
-          { required: true, message: '菜单权限不能为空', trigger: 'change' }
         ]
+        // menus: [
+        //   { required: true, message: '菜单权限不能为空', trigger: 'change' }
+        // ]
       },
       defaultProps: {
         children: 'children',
